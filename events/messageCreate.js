@@ -9,7 +9,6 @@ module.exports = {
             const userData = await client.database.leveldb.findOne({ where: { name: message.author.id } });
             if(userData){
                 if(Date.now()-userData.dataValues.updatedAt<60000) return console.log(Date.now()-userData.dataValues.updatedAt);
-                console.log(userData)
                 await client.database.leveldb.update(
                     { xp: userData.dataValues.xp + Math.floor(Math.random()*3)+3 },
                     { where: { name: message.author.id } }

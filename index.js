@@ -9,6 +9,8 @@ const client = new Client({
         GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMembers,
 		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.GuildPresences,
+		GatewayIntentBits.GuildVoiceStates,
     ]
 });
 
@@ -31,6 +33,7 @@ const leveldb = sequelize.define('leveling', {
 client.database = {
 	sequelize: sequelize,
 	leveldb: leveldb,
+	voiceBuffer: {}
 };
 
 leveldb.sync();

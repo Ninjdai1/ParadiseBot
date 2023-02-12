@@ -1,25 +1,41 @@
-const { SlashCommandBuilder, AttachmentBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('discord.js');
 const canvacord = require("canvacord");
-const sequelize = require('sequelize')
+const fs = require('fs');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('rank')
-		.setDescription('Afficher votre level.'),
+		.setDescription('Afficher votre level.')
+        .addUserOption(
+            option =>  option
+                .setName('member')
+                .setDescription('Utilisateur')
+                .setRequired(false)
+        ),
 
 	async execute(interaction, client) {
-        const userLevelData = await client.database.leveldb.findOne({ where: { name: interaction.user.id } });
+        const member = interaction.options.getMember('member') || interaction.member;
+        const userLevelData = await client.database.leveldb.findOne({ where: { name: member.id } });
+
+        const rank = new canvacord.Rank()
+            .setCurrentXP(0)
+            .setRequiredXP(25)
+            .setStatus(member.presence?.status || "offline")
+            .setRank(0, 'RANK', false)
+            .setLevel(0, "NIVEAU  ")
+            .setProgressBar("#FFFFFF", "COLOR")
+
         if(userLevelData){
-            const rank = new canvacord.Rank()
-                .setAvatar(interaction.user.displayAvatarURL({ dynamic: false, format: 'png' }))
+            rank.setAvatar(member.displayAvatarURL({ dynamic: false, format: 'png' }))
                 .setCurrentXP(userLevelData.dataValues.xp)
                 .setRequiredXP(userLevelData.dataValues.level*5 + 25)
-                .setStatus("online")
-                .setRank(0, 'RANK', false)
                 .setLevel(userLevelData.dataValues.level, "NIVEAU  ")
-                .setProgressBar("#FFFFFF", "COLOR")
-                .setUsername(interaction.user.username)
-                .setDiscriminator(interaction.user.discriminator);
+                .setUsername(member.user.username)
+                .setDiscriminator(member.user.discriminator);
+
+            if (fs.existsSync(`customization/${member.id}.png`)) {
+                rank.setBackground("IMAGE", `customization/${member.id}.png`)
+            }
             
             rank.build()
                 .then(data => {
@@ -28,11 +44,18 @@ module.exports = {
 
         } else {
             await client.database.leveldb.create({
-                name: interaction.user.id,
+                name: member.id,
                 xp: 0,
                 level: 0
             });
-            return interaction.reply({ content: "Commence à parler pour gagner de l'xp !" })
+
+            rank.setAvatar(user.displayAvatarURL({ dynamic: false, format: 'png' }))
+                .setUsername(member.user.username)
+                .setDiscriminator(member.user.discriminator);
+            rank.build()
+                .then(data => {
+                    interaction.reply({ files: [data]});
+                });
         }
 	},
 };
