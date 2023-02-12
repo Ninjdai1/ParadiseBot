@@ -1,3 +1,5 @@
+const { buttonList } = require('../interactions/buttons/index.js');
+
 module.exports = {
     name: 'interactionCreate',
     async execute(interaction, client) {
@@ -15,6 +17,8 @@ module.exports = {
                     console.error(error);
                 }
             }
+        } else if (interaction.isButton()) {
+            buttonList[interaction.customId.split("_")[0]] ? buttonList[interaction.customId.split("_")[0]].execute(interaction, client) : interaction.reply({ content: "Si vous rencontrez cette erreur, merci de contacter CoolMan#4094 !", ephemeral: true });
         }
     }
 }
