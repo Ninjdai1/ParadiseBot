@@ -8,7 +8,7 @@ const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMembers,
-		GatewayIntentBits.GuildMessages
+		GatewayIntentBits.GuildMessages,
     ]
 });
 
@@ -47,3 +47,4 @@ for (const file of eventFiles) {
 
 deploy_commands(client, true);//true: will refresh slash commands
 
+client.login(token)

@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Ninjdai1/ParadiseBot#readme",
   "dependencies": {
+    "canvacord": "^5.4.8",
     "discord.js": "^14.7.1",
     "sequelize": "^6.28.0",
     "sqlite3": "^5.1.4"
