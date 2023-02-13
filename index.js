@@ -1,7 +1,7 @@
 const fs = require('fs');
 const Sequelize = require('sequelize');
-const { Client, GatewayIntentBits } = require("discord.js");
-const { token, sequelizeCredentials } = require('./config.json');
+const { Client, GatewayIntentBits, WebhookClient } = require("discord.js");
+const { token, sequelizeCredentials, confessWebhook } = require('./config.json');
 const { deploy_commands, autoUpdate } = require('./functions.js');
 
 autoUpdate()
@@ -34,13 +34,23 @@ const leveldb = sequelize.define('leveling', {
 	cardColor: Sequelize.STRING
 });
 
+const userdb = sequelize.define('users', {
+	name: {//id
+		type: Sequelize.STRING,
+		unique: true,
+	},
+    confessBL: Sequelize.BOOLEAN,
+});
+
 client.database = {
 	sequelize: sequelize,
 	leveldb: leveldb,
+	userdb: userdb,
 	voiceBuffer: {}
 };
 
 leveldb.sync();
+userdb.sync();
 
 
 process.on('uncaughtException', error =>{
@@ -49,6 +59,8 @@ process.on('uncaughtException', error =>{
 client.on('error', error =>{
 	console.error(error);
 });
+
+client.confessWebhook = new WebhookClient({ url: confessWebhook });
 
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
