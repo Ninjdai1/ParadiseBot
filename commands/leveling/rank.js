@@ -1,6 +1,7 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const canvacord = require("canvacord");
 const fs = require('fs');
+const { devId } = require('../../config.json')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -36,7 +37,7 @@ module.exports = {
                 .setProgressBar(cardColor, "COLOR")
                 .setLevelColor(cardColor, cardColor);;
 
-            if (fs.existsSync(`customization/${member.id}.png`)) {
+            if (fs.existsSync(`customization/${member.id}.png`) && (member.premiumSince || member.permissions.has(PermissionFlagsBits.Administrator) || member.id==devId)) {
                 rank.setBackground("IMAGE", `customization/${member.id}.png`)
             }
             

@@ -49,7 +49,7 @@ async function giveLevelRoles(client, userId){
     const userData = await client.database.leveldb.findOne({ where: { name: userId } });
     if(userData && levelRoles[String(userData.dataValues.level)]){
         const guild = await client.guilds.fetch(guildId);
-        const role = await guild.roles.roles.find(role => role.id == levelRoles[String(userData.dataValues.level)]);
+        const role = await guild.roles.fetch(levelRoles[String(userData.dataValues.level)]);
         const member = await guild.members.fetch(userId);
         if(!member.roles.cache.has(role.id)) await member.roles.add(role);
     }

@@ -2,6 +2,7 @@ module.exports = {
     name: 'voiceStateUpdate',
     on: true,
     async execute(oldVoiceState, newVoiceState, client) {
+        console.log(newVoiceState)
         if (newVoiceState.channel && !newVoiceState.selfMute && !newVoiceState.serverMute) {
             const channel = await newVoiceState.guild.channels.fetch(newVoiceState.channelId);
             if (!client.database.voiceBuffer[newVoiceState.member.id]) client.database.voiceBuffer[newVoiceState.member.id] = {
