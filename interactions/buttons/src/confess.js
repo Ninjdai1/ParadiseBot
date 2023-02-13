@@ -26,7 +26,7 @@ module.exports = {
                     .setEmoji("🛠️");
 
                 await interaction.editReply({ components: [new ActionRowBuilder().setComponents([unblBTN])] });
-                await interaction.followUp({ content: `<@${userId}> a bien été blacklisté des confessions !`, ephemeral: true })
+                await interaction.followUp({ content: `<@${userId}> a bien été blacklisté.e des confessions !`, ephemeral: true })
                 break;
             case 'unblacklist':
                 await interaction.deferUpdate();
@@ -50,7 +50,7 @@ module.exports = {
                     .setEmoji("🛠️")
                     .setLabel("Blacklister")
                 await interaction.editReply({ components: [new ActionRowBuilder().setComponents([blBTN])] });
-                await interaction.followUp({ content: `<@${UnuserId}> a bien été dé-blacklisté des confessions !`, ephemeral: true })
+                await interaction.followUp({ content: `<@${UnuserId}> a bien été dé-blacklisté.e des confessions !`, ephemeral: true })
                 break;
         }
     }

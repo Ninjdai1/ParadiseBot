@@ -16,7 +16,7 @@ module.exports = {
     async execute(interaction, client){
         const userData = await client.database.userdb.findOne({ where: { name: interaction.user.id } });
         console.log(userData)
-        if(userData?.dataValues && userData.dataValues.confessBL) return interaction.reply({ content: "Votre confession n'a pas été envoyée, car vous êtes blacklisté des confessions !", ephemeral: true });
+        if(userData?.dataValues && userData.dataValues.confessBL) return interaction.reply({ content: "Votre confession n'a pas été envoyée, car vous êtes blacklisté.e des confessions !", ephemeral: true });
         const texte = interaction.options.getString('texte');
         const confessEmbed = new EmbedBuilder()
             .setTitle("Confession anonyme d'un membre de Paradis...")
