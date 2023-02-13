@@ -2,7 +2,9 @@ const fs = require('fs');
 const Sequelize = require('sequelize');
 const { Client, GatewayIntentBits } = require("discord.js");
 const { token, sequelizeCredentials } = require('./config.json');
-const { deploy_commands } = require('./functions.js');
+const { deploy_commands, autoUpdate } = require('./functions.js');
+
+autoUpdate()
 
 const client = new Client({
     intents: [

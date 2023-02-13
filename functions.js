@@ -4,7 +4,8 @@ const { token, clientId, guildId, levelRoles } = require('./config.json');
 const { Collection } = require('discord.js');
 const fs = require('fs');
 const rest = new REST({ version: '10' }).setToken(token);
-
+const util = require('node:util');
+const exec = util.promisify(require('node:child_process').exec);
 
 function deploy_commands(client, loadcommands) {
     if (typeof loadcommands != 'boolean') throw "type of loadcommands argument needs to be boolean";
@@ -55,4 +56,11 @@ async function giveLevelRoles(client, userId){
     }
 }
 
-module.exports = { deploy_commands, giveLevelRoles }
+
+async function autoUpdate() {
+  const { stdout, stderr } = await exec('git fetch && git pull');
+  console.log('stdout:', stdout);
+  console.error('stderr:', stderr);
+}
+
+module.exports = { deploy_commands, giveLevelRoles, autoUpdate }
