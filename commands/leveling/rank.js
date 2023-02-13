@@ -1,7 +1,7 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const canvacord = require("canvacord");
 const fs = require('fs');
-const { devId } = require('../../config.json')
+const { devId } = require('../../config.json');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -24,7 +24,7 @@ module.exports = {
             .setStatus(member.presence?.status || "offline")
             .setRank(0, 'RANK', false)
             .setLevel(0, "NIVEAU  ")
-            .setProgressBar("#FFFFFF", "COLOR")
+            .setProgressBar("#FFFFFF", "COLOR");
 
         if(userLevelData){
             const cardColor = userLevelData.dataValues.cardColor
@@ -35,11 +35,11 @@ module.exports = {
                 .setUsername(member.user.username, cardColor)
                 .setDiscriminator(member.user.discriminator)
                 .setProgressBar(cardColor, "COLOR")
-                .setLevelColor(cardColor, cardColor);;
+                .setLevelColor(cardColor, cardColor);
 
             if (fs.existsSync(`customization/${member.id}.png`) && (member.premiumSince || member.permissions.has(PermissionFlagsBits.Administrator) || member.id==devId)) {
-                rank.setBackground("IMAGE", `customization/${member.id}.png`)
-            }
+                rank.setBackground("IMAGE", `customization/${member.id}.png`);
+            };
             
             rank.build()
                 .then(data => {
