@@ -40,6 +40,15 @@ client.database = {
 
 leveldb.sync();
 
+
+process.on('uncaughtException', error =>{
+	console.error(error);
+});
+client.on('error', error =>{
+	console.error(error);
+});
+
+
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
