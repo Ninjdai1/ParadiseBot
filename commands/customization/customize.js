@@ -14,7 +14,7 @@ module.exports = {
 
 const customizeEmbed = new EmbedBuilder()
     .setTitle('Customisation')
-    .setDescription("Sur ce menu, vous pouvez configurer le bot à votre guise !")
+    .setDescription("Sur ce menu, vous pouvez configurer le bot à votre guise !\nCouleur : Choisissez la couleur des éléments de votre carte\nImage : Choisissez l'arrière-plan de votre carte (réservé aux soutiens)")
     .setColor("#079b96")
 
 const colorBTN = new ButtonBuilder()
