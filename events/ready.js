@@ -31,7 +31,7 @@ module.exports = {
                 } else {
                     client.database.leveldb.create({
                         name: userId,
-                        xp: xpVCs[parentId]||3,
+                        xp: xpVCs[data.parentId]||3,
                         level: 0,
                         cardColor: "#ffffff"
                     });
