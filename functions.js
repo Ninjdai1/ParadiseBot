@@ -58,7 +58,7 @@ async function giveLevelRoles(client, userId){
 
 
 async function autoUpdate() {
-  const { stdout, stderr } = await exec('git fetch && git pull');
+  const { stdout, stderr } = await exec('git fetch && git pull --ff-only');
   console.log('stdout:', stdout);
   console.error('stderr:', stderr);
 }
