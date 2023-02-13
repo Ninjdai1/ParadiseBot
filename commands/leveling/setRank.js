@@ -31,7 +31,8 @@ module.exports = {
             await client.database.leveldb.create({
                 name: member.id,
                 xp: 0,
-                level: level
+                level: level,
+                cardColor: "#ffffff"
             });
         }
         await interaction.reply({ content: `<@${member.id}> est désormais niveau ${level}` })

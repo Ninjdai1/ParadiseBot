@@ -1,4 +1,5 @@
 const { buttonList } = require('../interactions/buttons/index.js');
+const { selectMenuList } = require('../interactions/selectmenus/index.js');
 
 module.exports = {
     name: 'interactionCreate',
@@ -19,6 +20,8 @@ module.exports = {
             }
         } else if (interaction.isButton()) {
             buttonList[interaction.customId.split("_")[0]] ? buttonList[interaction.customId.split("_")[0]].execute(interaction, client) : interaction.reply({ content: "Si vous rencontrez cette erreur, merci de contacter CoolMan#4094 !", ephemeral: true });
+        } else if (interaction.isStringSelectMenu()) {
+            selectMenuList[interaction.customId.split("_")[0]] ? selectMenuList[interaction.customId.split("_")[0]].execute(interaction, client) : interaction.reply({ content: "Si vous rencontrez cette erreur, merci de contacter CoolMan#4094 !", ephemeral: true });
         }
     }
 }

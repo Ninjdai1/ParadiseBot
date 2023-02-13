@@ -1,10 +1,9 @@
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
-const { token, clientId, guildId } = require('./config.json');
+const { token, clientId, guildId, levelRoles } = require('./config.json');
 const { Collection } = require('discord.js');
 const fs = require('fs');
 const rest = new REST({ version: '10' }).setToken(token);
-
 
 
 function deploy_commands(client, loadcommands) {
@@ -45,4 +44,15 @@ async function slashCommandLoad(client, commands) {
     return client.commands;
 };
 
-module.exports = { deploy_commands }
+
+async function giveLevelRoles(client, userId){
+    const userData = await client.database.leveldb.findOne({ where: { name: userId } });
+    if(userData && levelRoles[String(userData.dataValues.level)]){
+        const guild = await client.guilds.fetch(guildId);
+        const role = await guild.roles.fetch(levelRoles[String(userData.dataValues.level)]);
+        const member = guild.members.fetch(userId);
+        if(!member.roles.cache.has(role.id)) await member.roles.add(role);
+    }
+}
+
+module.exports = { deploy_commands, giveLevelRoles }

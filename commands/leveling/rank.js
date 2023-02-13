@@ -26,12 +26,15 @@ module.exports = {
             .setProgressBar("#FFFFFF", "COLOR")
 
         if(userLevelData){
-            rank.setAvatar(member.displayAvatarURL({ dynamic: false, format: 'png' }))
-                .setCurrentXP(userLevelData.dataValues.xp)
-                .setRequiredXP(userLevelData.dataValues.level*5 + 25)
+            const cardColor = userLevelData.dataValues.cardColor
+            rank.setAvatar(member.user.displayAvatarURL({ dynamic: false, format: 'png' }))
+                .setCurrentXP(userLevelData.dataValues.xp, cardColor)
+                .setRequiredXP(userLevelData.dataValues.level*5 + 25, cardColor)
                 .setLevel(userLevelData.dataValues.level, "NIVEAU  ")
-                .setUsername(member.user.username)
-                .setDiscriminator(member.user.discriminator);
+                .setUsername(member.user.username, cardColor)
+                .setDiscriminator(member.user.discriminator)
+                .setProgressBar(cardColor, "COLOR")
+                .setLevelColor(cardColor, cardColor);;
 
             if (fs.existsSync(`customization/${member.id}.png`)) {
                 rank.setBackground("IMAGE", `customization/${member.id}.png`)
@@ -46,10 +49,11 @@ module.exports = {
             await client.database.leveldb.create({
                 name: member.id,
                 xp: 0,
-                level: 0
+                level: 0,
+                cardColor: "#ffffff"
             });
 
-            rank.setAvatar(user.displayAvatarURL({ dynamic: false, format: 'png' }))
+            rank.setAvatar(member.user.displayAvatarURL({ dynamic: false, format: 'png' }))
                 .setUsername(member.user.username)
                 .setDiscriminator(member.user.discriminator);
             rank.build()

@@ -8,16 +8,7 @@ module.exports = {
 		.setDescription('Customiser l\'apparence du bot.'),
 
 	async execute(interaction, client) {
-        return interaction.reply({ embeds: [customizeEmbed], components: [btnROW], ephemeral: true})
-
-        const image = interaction.options.getAttachment('image');
-
-        if(image){
-            fetch(image.url)
-            .then(res =>
-                res.body.pipe(fs.createWriteStream(`customization/${interaction.user.id}.png`))
-            )
-        }
+        return interaction.reply({ embeds: [customizeEmbed], components: [btnROW], ephemeral: true});
     }
 }
 

@@ -28,7 +28,8 @@ const leveldb = sequelize.define('leveling', {
 		unique: true,
 	},
     xp: Sequelize.INTEGER,
-    level: Sequelize.INTEGER
+    level: Sequelize.INTEGER,
+	cardColor: Sequelize.STRING
 });
 
 client.database = {

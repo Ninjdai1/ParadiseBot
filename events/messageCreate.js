@@ -1,4 +1,5 @@
 const { guildId } = require('../config.json')
+const { giveLevelRoles } = require('../functions')
 
 module.exports = {
     name: 'messageCreate',
@@ -21,13 +22,15 @@ module.exports = {
                         { where: { name: message.author.id } }
                     );
                     await message.reply({ content: `Bravo **${message.author.tag}**, tu es désormais niveau ${userDataUp.dataValues.level + 1}` });
+                    await giveLevelRoles(client, message.author.id)
                 };
 
             } else {
                 await client.database.leveldb.create({
                     name: message.author.id,
                     xp: 5,
-                    level: 0
+                    level: 0,
+                    cardColor: "#ffffff"
                 });
             }
         }

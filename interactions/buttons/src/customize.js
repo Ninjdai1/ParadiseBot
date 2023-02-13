@@ -1,4 +1,4 @@
-const { PermissionFlagsBits } = require("discord.js");
+const { PermissionFlagsBits, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
 const fetch = require('node-fetch')
 const fs = require('fs')
 
@@ -6,6 +6,7 @@ module.exports = {
     async execute(interaction, client){
         switch(interaction.customId.replace('customize_','')){
             case 'color':
+                await interaction.reply({ content: "Choisissez la couleur des éléments de la carte !", components: [colorRow], ephemeral: true })
                 break;
             case 'image':
                 if(!interaction.member.premiumSince && !interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return interaction.reply({ content: "Désolé, cette fonctionnalité n'est disponible que pour les boosters", ephemeral: true });
@@ -30,3 +31,44 @@ module.exports = {
         }
     }
 }
+
+const colorRow = new ActionRowBuilder()
+    .setComponents([
+        new StringSelectMenuBuilder()
+            .setCustomId('customize_color')
+            .setPlaceholder('Choisissez la couleur que vous souhaitez')
+            .setOptions([
+                new StringSelectMenuOptionBuilder()
+                    .setValue('#ffffff')
+                    .setLabel('Blanc')
+                    .setEmoji('⚪'),
+                new StringSelectMenuOptionBuilder()
+                    .setValue('#db0a0a')
+                    .setLabel('Rouge')
+                    .setEmoji('🔴'),
+                new StringSelectMenuOptionBuilder()
+                    .setValue('#000000')
+                    .setLabel('Noir')
+                    .setEmoji('⚫'),
+                new StringSelectMenuOptionBuilder()
+                    .setValue('#65398c')
+                    .setLabel('Violet')
+                    .setEmoji('🟣'),
+                new StringSelectMenuOptionBuilder()
+                    .setValue('#11429e')
+                    .setLabel('Bleu')
+                    .setEmoji('🔵'),
+                new StringSelectMenuOptionBuilder()
+                    .setValue('#e25300')
+                    .setLabel('Orange')
+                    .setEmoji('🟠'),
+                new StringSelectMenuOptionBuilder()
+                    .setValue('#dadd06')
+                    .setLabel('Jaune')
+                    .setEmoji('🟡'),
+                new StringSelectMenuOptionBuilder()
+                    .setValue('#0adb2a')
+                    .setLabel('Vert')
+                    .setEmoji('🟢'),
+            ])
+    ])
