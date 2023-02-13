@@ -1,4 +1,5 @@
 const { xpVCs } = require('../config.json')
+const { giveLevelRoles } = require('../functions')
 
 module.exports = {
 	name: 'ready',
@@ -7,14 +8,16 @@ module.exports = {
         console.log("Prêt !");
         client.user.setStatus('online');
         setInterval(async ()=>{
-            for (let [userId, channelId] of Object.entries(client.database.voiceBuffer)) {
+            for (let [userId, data] of Object.entries(client.database.voiceBuffer)) {
+                if(data.active==false) return;
                 const userData = await client.database.leveldb.findOne({ where: { name: userId } });
 
                 if(userData){
                     await client.database.leveldb.update(
-                        { xp: userData.dataValues.xp + xpVCs[channelId]||5 },
+                        { xp: userData.dataValues.xp + (xpVCs[data.parentId]||3) },
                         { where: { name: userId } }
                     );
+                    client.database.voiceBuffer[userId].xpGain += xpVCs[data.parentId]||3
 
                     const userDataUp = await client.database.leveldb.findOne({ where: { name: userId } });
                     if(userDataUp.dataValues.xp >= userDataUp.dataValues.level*5 + 25){
@@ -28,10 +31,11 @@ module.exports = {
                 } else {
                     client.database.leveldb.create({
                         name: userId,
-                        xp: xpVCs[channelId]||5,
+                        xp: xpVCs[parentId]||3,
                         level: 0,
                         cardColor: "#ffffff"
                     });
+                    client.database.voiceBuffer[userId].xpGain += xpVCs[data.parentId]||3
                 }
             }
         }, 60000)

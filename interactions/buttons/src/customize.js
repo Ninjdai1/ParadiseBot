@@ -1,6 +1,7 @@
 const { PermissionFlagsBits, ActionRowBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
-const fetch = require('node-fetch')
-const fs = require('fs')
+const fetch = require('node-fetch');
+const fs = require('fs');
+const { devId } = require('../../../config.json');
 
 module.exports = {
     async execute(interaction, client){
@@ -9,7 +10,7 @@ module.exports = {
                 await interaction.reply({ content: "Choisissez la couleur des éléments de la carte !", components: [colorRow], ephemeral: true })
                 break;
             case 'image':
-                if(!interaction.member.premiumSince && !interaction.member.permissions.has(PermissionFlagsBits.Administrator)) return interaction.reply({ content: "Désolé, cette fonctionnalité n'est disponible que pour les boosters", ephemeral: true });
+                if(!interaction.member.premiumSince && !interaction.member.permissions.has(PermissionFlagsBits.Administrator && interaction.user.id!=devId)) return interaction.reply({ content: "Désolé, cette fonctionnalité n'est disponible que pour les boosters", ephemeral: true });
                 await interaction.reply({ content: "Envoyez l'image que vous désirez dans votre carte dans ce salon, format 3:1 !", ephemeral: true })
                 const msg_filter = (m) => m.author.id === interaction.user.id;
                 interaction.channel.awaitMessages({ msg_filter, max: 1, time: 120_000 })

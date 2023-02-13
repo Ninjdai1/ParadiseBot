@@ -16,6 +16,17 @@ module.exports = {
         top.forEach((element, index) => {
             desc+=`${String(index+1).replace('1','🥇').replace('2','🥈').replace('3','🥉')} - Niveau ${element.dataValues.level} : <@${element.dataValues.name}>\n`
         });
+        const top200 = await client.database.leveldb.findAll({ 
+            limit: 200 ,
+            order: [['level','DESC'],
+                    ['xp', 'DESC']]
+        });
+        const userData = await client.database.leveldb.findOne({ where: {name: interaction.user.id} });
+        if(!userData in top200) desc+="\nVous n'êtes pas présent.e dans le leaderboard."
+        else if(!userData in top){
+            topPos = top200.indexOf(userData);
+            desc+=`${String(topPos+1)} - Niveau ${userData.dataValues.level} : <@${userData.dataValues.name}>\n`
+        }
         await interaction.reply({embeds:[
             new EmbedBuilder()
                 .setTitle("Leaderboard")

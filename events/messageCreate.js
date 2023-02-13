@@ -22,7 +22,7 @@ module.exports = {
                         { where: { name: message.author.id } }
                     );
                     await message.reply({ content: `Bravo **${message.author.tag}**, tu es désormais niveau ${userDataUp.dataValues.level + 1}` });
-                    await giveLevelRoles(client, message.author.id)
+                    await giveLevelRoles(client, message.author.id);
                 };
 
             } else {
