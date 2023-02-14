@@ -22,7 +22,7 @@ module.exports = {
                     const userDataUp = await client.database.leveldb.findOne({ where: { name: userId } });
                     if(userDataUp.dataValues.xp >= userDataUp.dataValues.level*5 + 25){
                         await client.database.leveldb.update(
-                            { level: userDataUp.dataValues.level + 1, xp: userDataUp.dataValues.xp - userDataUp.dataValues.level*5 - 25 },
+                            { level: userDataUp.dataValues.level + 1, xp: userDataUp.dataValues.xp - userDataUp.dataValues.level*13 - 25 },
                             { where: { name: userId } }
                         );
                         await giveLevelRoles(client, userId)
