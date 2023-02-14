@@ -1,5 +1,6 @@
-const { buttonList } = require('../interactions/buttons/index.js');
-const { selectMenuList } = require('../interactions/selectmenus/index.js');
+const { buttonList } = require('../interactions/buttons/index');
+const { selectMenuList } = require('../interactions/selectmenus/index');
+const { modalList } = require('../interactions/modals/index');
 
 module.exports = {
     name: 'interactionCreate',
@@ -22,6 +23,8 @@ module.exports = {
             buttonList[interaction.customId.split("_")[0]] ? buttonList[interaction.customId.split("_")[0]].execute(interaction, client) : interaction.reply({ content: "Si vous rencontrez cette erreur, merci de contacter CoolMan#4094 !", ephemeral: true });
         } else if (interaction.isStringSelectMenu()) {
             selectMenuList[interaction.customId.split("_")[0]] ? selectMenuList[interaction.customId.split("_")[0]].execute(interaction, client) : interaction.reply({ content: "Si vous rencontrez cette erreur, merci de contacter CoolMan#4094 !", ephemeral: true });
+        } else if (interaction.isModalSubmit()) {
+            modalList[interaction.customId.split("_")[0]] ? modalList[interaction.customId.split("_")[0]].execute(interaction, client) : interaction.reply({ content: "Si vous rencontrez cette erreur, merci de contacter CoolMan#4094 !", ephemeral: true });
         }
     }
 }
