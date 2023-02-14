@@ -24,7 +24,8 @@ module.exports = {
             .setStatus(member.presence?.status || "offline")
             .setRank(0, 'RANK', false)
             .setLevel(0, "NIVEAU  ")
-            .setProgressBar("#FFFFFF", "COLOR");
+            .setProgressBar("#FFFFFF", "COLOR")
+            .setBackground('IMAGE', 'default.png');
 
         if(userLevelData){
             const cardColor = userLevelData.dataValues.cardColor
