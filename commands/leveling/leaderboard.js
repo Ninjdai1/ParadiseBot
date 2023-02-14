@@ -11,7 +11,6 @@ module.exports = {
             order: [['level','DESC'],
                     ['xp', 'DESC']]
         });
-        console.log(top)
         let desc = ""
         top.forEach((element, index) => {
             desc+=`${String(index+1).replace('1','🥇').replace('2','🥈').replace('3','🥉')} - Niveau ${element.dataValues.level} : <@${element.dataValues.name}>\n`
