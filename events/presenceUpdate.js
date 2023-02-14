@@ -5,7 +5,6 @@ module.exports = {
     name: 'presenceUpdate',
     on: true,
     async execute(oldPresence, newPresence, client) {
-        console.log(newPresence)
         if(newPresence.guild.id==guildId && newPresence?.activities[0]?.state?.includes('.gg/paradis') && !oldPresence?.activities[0]?.state?.includes('.gg/paradis')){
             const role = await newPresence.guild.roles.fetch(supportRoleId);
             if(!newPresence.member.roles.cache.has(role.id)){
