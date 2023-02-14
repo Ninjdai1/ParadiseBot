@@ -30,7 +30,7 @@ module.exports = {
             const cardColor = userLevelData.dataValues.cardColor
             rank.setAvatar(member.user.displayAvatarURL({ dynamic: false, format: 'png' }))
                 .setCurrentXP(userLevelData.dataValues.xp, cardColor)
-                .setRequiredXP(userLevelData.dataValues.level*5 + 25, cardColor)
+                .setRequiredXP(userLevelData.dataValues.level*13 + 25, cardColor)
                 .setLevel(userLevelData.dataValues.level, "NIVEAU  ")
                 .setUsername(member.user.username, cardColor)
                 .setDiscriminator(member.user.discriminator)
