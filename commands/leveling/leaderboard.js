@@ -13,7 +13,7 @@ module.exports = {
         });
         let desc = ""
         top.forEach((element, index) => {
-            desc+=`${String(index+1).replace('1','🥇').replace('2','🥈').replace('3','🥉')} - Niveau ${element.dataValues.level} : <@${element.dataValues.name}>\n`
+            desc+=`${String(index+1).replace('1','🥇').replace('2','🥈').replace('3','🥉').replace('🥇0','10')} - Niveau ${element.dataValues.level} : <@${element.dataValues.name}>\n`
         });
         const top200 = await client.database.leveldb.findAll({ 
             limit: 200 ,
