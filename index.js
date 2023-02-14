@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Sequelize = require('sequelize');
-const { Client, GatewayIntentBits, WebhookClient } = require("discord.js");
+const { Client, GatewayIntentBits } = require("discord.js");
 const { token, sequelizeCredentials, confessWebhook } = require('./config.json');
 const { deploy_commands, autoUpdate } = require('./functions.js');
 
@@ -59,8 +59,6 @@ process.on('uncaughtException', error =>{
 client.on('error', error =>{
 	console.error(error);
 });
-
-client.confessWebhook = new WebhookClient({ url: confessWebhook });
 
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));

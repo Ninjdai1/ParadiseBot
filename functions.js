@@ -58,9 +58,12 @@ async function giveLevelRoles(client, userId){
 
 
 async function autoUpdate() {
-  const { stdout, stderr } = await exec('git fetch && git pull --ff-only');
-  console.log('stdout:', stdout);
-  console.error('stderr:', stderr);
+    const { stdout, stderr } = await exec('git fetch');
+    console.log('stdout:', stdout);
+    console.error('stderr:', stderr);
+    const { stdout2, stderr2 } = await exec('git pull --ff-only');
+    console.log('stdout2:', stdout2);
+    console.error('stderr2:', stderr2);
 }
 
 module.exports = { deploy_commands, giveLevelRoles, autoUpdate }
