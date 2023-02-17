@@ -24,11 +24,11 @@ module.exports = {
             .setStatus(member.presence?.status || "offline")
             .setRank(0, 'RANK', false)
             .setLevel(0, "NIVEAU  ")
-            .setProgressBar("#FFFFFF", "COLOR")
+            .setProgressBar("#f8ddbf", "COLOR")
             .setBackground('IMAGE', 'default.png');
 
         if(userLevelData){
-            const cardColor = userLevelData.dataValues.cardColor
+            const cardColor = userLevelData.dataValues.cardColor;
             rank.setAvatar(member.user.displayAvatarURL({ dynamic: false, format: 'png' }))
                 .setCurrentXP(userLevelData.dataValues.xp, cardColor)
                 .setRequiredXP(userLevelData.dataValues.level*13 + 25, cardColor)
@@ -52,7 +52,7 @@ module.exports = {
                 name: member.id,
                 xp: 0,
                 level: 0,
-                cardColor: "#ffffff"
+                cardColor: "#f8ddbf"
             });
 
             rank.setAvatar(member.user.displayAvatarURL({ dynamic: false, format: 'png' }))
