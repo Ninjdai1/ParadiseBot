@@ -40,17 +40,29 @@ const userdb = sequelize.define('users', {
 		unique: true,
 	},
     confessBL: Sequelize.BOOLEAN,
+	guessCD: Sequelize.NUMBER
+});
+
+const serverdb = sequelize.define('server', {
+	name: {//id
+		type: Sequelize.STRING,
+		unique: true,
+	},
+	guessReward: Sequelize.STRING,
+	guessNum: Sequelize.NUMBER,
 });
 
 client.database = {
 	sequelize: sequelize,
 	leveldb: leveldb,
 	userdb: userdb,
+	serverdb: serverdb,
 	voiceBuffer: {}
 };
 
 leveldb.sync();
 userdb.sync();
+serverdb.sync()
 
 
 process.on('uncaughtException', error =>{
