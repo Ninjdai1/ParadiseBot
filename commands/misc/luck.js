@@ -2,7 +2,7 @@ const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('guess')
+		.setName('luck')
 		.setDescription('Essayer de tomber sur le numéro gagnant'),
 
 	async execute(interaction, client) {
@@ -40,16 +40,16 @@ module.exports = {
         if(serverData.dataValues.guessNum == guessedNum){
             embed
                 .setDescription(
-                    `Voyons si tu as eu de la chance <@${interaction.user.id}> 🍀 !\n\n`
-                    + `Tu as eu **${guessedNum}** !\n\n`
-                    + `Tu as obtenu le bon nombre ! Contacte l'équipe pour recevoir ${serverData.dataValues.guessReward} !`
+                    `***Voyons voir si tu as de la chance !*** <:emoji_403:1079866988857409656> <@${interaction.user.id}> \n\n`
+                    + `Tu as obtenu **${guessedNum}** !\n\n`
+                    + `Tu as obtenu le bon nombre ! Contacte l'équipe pour recevoir ton ${serverData.dataValues.guessReward} !`
                 )
         } else {
             embed
                 .setDescription(
-                    `Voyons si tu as eu de la chance <@${interaction.user.id}> 🍀 !\n\n`
+                    `***Voyons voir si tu as de la chance !*** <:emoji_403:1079866988857409656> <@${interaction.user.id}> \n\n`
                     + `Tu as eu **${guessedNum}** !\n\n`
-                    + `Si tu obtiens le nombre __${serverData.dataValues.guessNum}__, tu gagnes ${serverData.dataValues.guessReward}`
+                    + `*Si tu obtiens le nombre* ***__${serverData.dataValues.guessNum}__*** *tu gagnes un* ***${serverData.dataValues.guessReward}*** <a:P_boost:972371295771701308>`
                 )
         }
         await interaction.editReply({ embeds: [embed] });
