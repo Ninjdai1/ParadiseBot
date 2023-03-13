@@ -29,7 +29,7 @@
     "discord.js": "^14.8.0",
     "illustrator.js": "^0.3.4",
     "node-fetch": "^2.6.9",
-    "sequelize": "^6.28.0",
+    "sequelize": "^6.29.3",
     "sqlite3": "^5.1.4"
   }
 }
