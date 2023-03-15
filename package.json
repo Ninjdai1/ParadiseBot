@@ -30,6 +30,6 @@
     "illustrator.js": "^0.3.4",
     "node-fetch": "^2.6.9",
     "sequelize": "^6.29.3",
-    "sqlite3": "^5.1.4"
+    "sqlite3": "^5.1.5"
   }
 }
