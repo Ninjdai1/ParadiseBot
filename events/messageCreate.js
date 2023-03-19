@@ -1,3 +1,4 @@
+const { EmbedBuilder } = require('discord.js');
 const { guildId } = require('../config.json');
 const { giveLevelRoles } = require('../functions');
 
@@ -9,17 +10,17 @@ module.exports = {
         if(!client.isXPEnabled) return;
         if(message.content=="+luck") {
             const now = Date.now();
-            let userData = await client.database.userdb.findOne({ where: { name: message.user.id } });
+            let userData = await client.database.userdb.findOne({ where: { name: message.author.id } });
             if(userData){
-                if(now - userData.dataValues.guessCD < 24 * 60 * 60 * 1000) return message.editReply({ content: "Vous avez déjà utilisé la commande dans les dernières 24H !", ephemeral: true });
+                if(now - userData.dataValues.guessCD < 24 * 60 * 60 * 1000) return message.reply({ content: "Vous avez déjà utilisé la commande dans les dernières 24H !", ephemeral: true });
                 else await client.database.userdb.update(
                     { guessCD: now },
-                    { where: { name: message.user.id } }
+                    { where: { name: message.author.id } }
                 );
             }
             else{
                 await client.database.userdb.create({
-                    name: message.user.id,
+                    name: message.author.id,
                     confessBL: false,
                     guessCD: now
                 });
@@ -41,14 +42,14 @@ module.exports = {
             if(serverData.dataValues.guessNum == guessedNum){
                 embed
                     .setDescription(
-                        `***Voyons voir si tu as de la chance !*** <:emoji_403:1079866988857409656> <@${message.user.id}> \n\n`
+                        `***Voyons voir si tu as de la chance !*** <:emoji_403:1079866988857409656> <@${message.author.id}> \n\n`
                         + `Tu as obtenu **${guessedNum}** !\n\n`
                         + `Tu as obtenu le bon nombre ! Contacte l'équipe pour recevoir ton ${serverData.dataValues.guessReward} !`
                     )
             } else {
                 embed
                     .setDescription(
-                        `***Voyons voir si tu as de la chance !*** <:emoji_403:1079866988857409656> <@${message.user.id}> \n\n`
+                        `***Voyons voir si tu as de la chance !*** <:emoji_403:1079866988857409656> <@${message.author.id}> \n\n`
                         + `Tu as eu **${guessedNum}** !\n\n`
                         + `*Si tu obtiens le nombre* ***__${serverData.dataValues.guessNum}__*** *tu gagnes un* ***${serverData.dataValues.guessReward}*** <a:P_boost:972371295771701308>`
                     )
