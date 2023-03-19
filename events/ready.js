@@ -1,4 +1,4 @@
-const { xpVCs } = require('../config.json')
+const { xpVCs, guildId } = require('../config.json')
 const { giveLevelRoles } = require('../functions')
 
 module.exports = {
@@ -7,6 +7,8 @@ module.exports = {
 	async execute(client) {
         console.log("Prêt !");
         client.user.setStatus('online');
+        let serverData = await client.database.serverdb.findOne({ where: { name: guildId } });
+        client.isXPEnabled = serverData?.dataValues?.xp || true;
         setInterval(async ()=>{
             for (let [userId, data] of Object.entries(client.database.voiceBuffer)) {
                 if(data.active==false) return;

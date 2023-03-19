@@ -1,11 +1,12 @@
-const { guildId } = require('../config.json')
-const { giveLevelRoles } = require('../functions')
+const { guildId } = require('../config.json');
+const { giveLevelRoles } = require('../functions');
 
 module.exports = {
     name: 'messageCreate',
     on: true,
     async execute(message, client) {
         if(message.author.bot) return;
+        if(!client.isXPEnabled) return;
         if(message.guildId == guildId) {
             const userData = await client.database.leveldb.findOne({ where: { name: message.author.id } });
             if(userData){
