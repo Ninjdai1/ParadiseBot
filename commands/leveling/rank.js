@@ -97,7 +97,7 @@ async function generateRankCard(member, userLevelData, rank){
         .setColor(config.cardColor)
         .setFont("MANROPE_BOLD", "85px")
         .writeText(config.username, 485, illustrator.height / 2 - 25)
-    if(rank>0) textTool
+    if(config.rank!=-1) textTool
         .setColor("#A7A7A7")
         .setFont("MANROPE_BOLD", "40px")
         .writeText(`RANK:`, 500, illustrator.height / 2 + 120)
