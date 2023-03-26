@@ -32,6 +32,7 @@ module.exports = {
             order: [['level','DESC'],
                     ['xp', 'DESC']]
         });
+        console.log(top200)
 
         let rank = -1
         if(userLevelData in top200){
@@ -97,7 +98,7 @@ async function generateRankCard(member, userLevelData, rank){
         .setColor(config.cardColor)
         .setFont("MANROPE_BOLD", "85px")
         .writeText(config.username, 485, illustrator.height / 2 - 25)
-    if(config.rank!=0) textTool
+    if(config.rank!=-1) textTool
         .setColor("#A7A7A7")
         .setFont("MANROPE_BOLD", "40px")
         .writeText(`RANK:`, 500, illustrator.height / 2 + 120)
