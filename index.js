@@ -57,7 +57,8 @@ client.database = {
 	leveldb: leveldb,
 	userdb: userdb,
 	serverdb: serverdb,
-	voiceBuffer: {}
+	voiceBuffer: {},
+	top: []
 };
 
 leveldb.sync();

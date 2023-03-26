@@ -27,17 +27,8 @@ module.exports = {
             });
             userLevelData = await client.database.leveldb.findOne({ where: { name: member.id } });
         };
-        const top200 = await client.database.leveldb.findAll({ 
-            limit: 200 ,
-            order: [['level','DESC'],
-                    ['xp', 'DESC']]
-        });
-        console.log(top200)
 
-        let rank = -1
-        if(top200.includes(userLevelData)){
-            rank = top200.indexOf(userData)+1;
-        };
+        const rank = client.database.top.indexOf(user.id);
         generateRankCard(member, userLevelData, rank)
             .then(data => {
                 interaction.editReply({ files: [data]});
@@ -103,7 +94,7 @@ async function generateRankCard(member, userLevelData, rank){
         .setFont("MANROPE_BOLD", "40px")
         .writeText(`RANK:`, 500, illustrator.height / 2 + 120)
         .setColor(config.cardColor)
-        .writeText(`#${config.rank}`, 500 + 130, illustrator.height / 2 + 120)
+        .writeText(`#${config.rank+1}`, 500 + 130, illustrator.height / 2 + 120)
     
     textTool.setColor("#A7A7A7")
         .setFont("MANROPE_BOLD", "40px")

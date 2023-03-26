@@ -41,5 +41,16 @@ module.exports = {
                 }
             }
         }, 60000)
+        setInterval(async ()=>{
+            client.database.top = [];
+            const top1000 = await client.database.leveldb.findAll({ 
+                limit: 1000 ,
+                order: [['level','DESC'],
+                        ['xp', 'DESC']]
+            });
+            top1000.forEach(element => {
+                client.database.top.append(element.dataValues.name);
+            });
+        }, 600000)
     }
 }
