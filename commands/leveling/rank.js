@@ -35,7 +35,7 @@ module.exports = {
         console.log(top200)
 
         let rank = -1
-        if(userLevelData in top200){
+        if(top200.includes(userLevelData)){
             rank = top200.indexOf(userData)+1;
         };
         generateRankCard(member, userLevelData, rank)
