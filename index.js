@@ -2,7 +2,7 @@ const fs = require('fs');
 const Sequelize = require('sequelize');
 const { Client, GatewayIntentBits } = require("discord.js");
 const { token, sequelizeCredentials, confessWebhook } = require('./config.json');
-const { deploy_commands, autoUpdate } = require('./functions.js');
+const { deploy_commands, deploy_textcommands, autoUpdate } = require('./functions.js');
 
 autoUpdate()
 
@@ -85,5 +85,6 @@ for (const file of eventFiles) {
 }
 
 deploy_commands(client, true);//true: will refresh slash commands
+deploy_textcommands(client);
 
 client.login(token)
