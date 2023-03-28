@@ -31,6 +31,24 @@ function deploy_commands(client, loadcommands) {
     }
 }
 
+function deploy_textcommands(client,) {
+    if (typeof loadcommands != 'boolean') throw "type of loadcommands argument needs to be boolean";
+
+    const commands = [];
+    client.textcommands = new Collection();
+    const commandCategories = fs.readdirSync('./textcommands').filter(file => !file.includes('.'));
+    for (const category of commandCategories) {
+        const commandFiles = fs.readdirSync(`./textcommands/${category}`).filter(file => file.endsWith('.js'));
+        for (const file of commandFiles) {
+            const command = require(`./textcommands/${category}/${file}`);
+            commands.push(command.data);
+            client.commands.set(command.data.name, command);
+
+            console.log(`${category}/${command.data.name} chargé !`);
+        }
+    }
+}
+
 async function slashCommandLoad(client, commands) {
     try {
         console.log('Je commence à actualiser les commandes slash.');
