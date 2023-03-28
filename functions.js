@@ -31,7 +31,7 @@ function deploy_commands(client, loadcommands) {
     }
 }
 
-function deploy_textcommands(client,) {
+function deploy_textcommands(client) {
     if (typeof loadcommands != 'boolean') throw "type of loadcommands argument needs to be boolean";
 
     const commands = [];
