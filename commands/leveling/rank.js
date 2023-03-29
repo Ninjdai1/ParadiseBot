@@ -28,7 +28,7 @@ module.exports = {
             userLevelData = await client.database.leveldb.findOne({ where: { name: member.id } });
         };
 
-        const rank = client.database.top.indexOf(user.id);
+        const rank = client.database.top.indexOf(member.id);
         generateRankCard(member, userLevelData, rank)
             .then(data => {
                 interaction.editReply({ files: [data]});
