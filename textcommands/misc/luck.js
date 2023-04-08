@@ -2,9 +2,8 @@ const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
 	data: {
-    name: "luck"
-  }
-
+        name: "luck"
+    },
 	async execute(message, client) {
         const now = Date.now();
         let userData = await client.database.userdb.findOne({ where: { name: message.author.id } });

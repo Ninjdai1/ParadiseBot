@@ -4,7 +4,7 @@ const { Client, GatewayIntentBits } = require("discord.js");
 const { token, sequelizeCredentials, confessWebhook } = require('./config.json');
 const { deploy_commands, deploy_textcommands, autoUpdate } = require('./functions.js');
 
-autoUpdate()
+autoUpdate();
 
 const client = new Client({
     intents: [
