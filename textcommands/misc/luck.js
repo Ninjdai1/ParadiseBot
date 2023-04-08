@@ -2,7 +2,8 @@ const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
 	data: {
-        name: "luck"
+        name: "luck",
+        description: 'Essayer de tomber sur le numéro gagnant',
     },
 	async execute(message, client) {
         const now = Date.now();

@@ -1,8 +1,9 @@
 module.exports = {
     data: {
-        name: "rank"
+        name: "rank",
+        description: 'Afficher votre level.'
     },
-	  async execute(message, client) {
+	async execute(message, client) {
         const member = message.mentions.members.first() || message.author;
         let userLevelData = await client.database.leveldb.findOne({ where: { name: member.id } });
         if(!userLevelData){
