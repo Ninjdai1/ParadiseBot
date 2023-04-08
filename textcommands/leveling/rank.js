@@ -3,7 +3,7 @@ module.exports = {
         name: "rank",
         description: 'Afficher votre level.'
     },
-	async execute(message, client) {
+    async execute(message, client) {
         const member = message.mentions.members.first() || message.author;
         let userLevelData = await client.database.leveldb.findOne({ where: { name: member.id } });
         if(!userLevelData){
@@ -21,7 +21,7 @@ module.exports = {
             .then(data => {
                 interaction.editReply({ files: [data]});
             });
-	},
+    },
 };
 
 async function generateRankCard(member, userLevelData, rank){

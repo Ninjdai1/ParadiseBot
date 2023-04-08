@@ -1,11 +1,11 @@
 const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
-	data: {
+    data: {
         name: "luck",
         description: 'Essayer de tomber sur le numéro gagnant',
     },
-	async execute(message, client) {
+    async execute(message, client) {
         const now = Date.now();
         let userData = await client.database.userdb.findOne({ where: { name: message.author.id } });
         if(userData){

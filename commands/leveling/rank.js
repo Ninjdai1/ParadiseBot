@@ -4,9 +4,9 @@ const fs = require('fs');
 const { devId } = require('../../config.json');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('rank')
-		.setDescription('Afficher votre level.')
+    data: new SlashCommandBuilder()
+        .setName('rank')
+        .setDescription('Afficher votre level.')
         .addUserOption(
             option =>  option
                 .setName('member')
@@ -14,7 +14,7 @@ module.exports = {
                 .setRequired(false)
         ),
 
-	async execute(interaction, client) {
+    async execute(interaction, client) {
         await interaction.deferReply();
         const member = interaction.options.getMember('member') || interaction.member;
         let userLevelData = await client.database.leveldb.findOne({ where: { name: member.id } });
@@ -33,7 +33,7 @@ module.exports = {
             .then(data => {
                 interaction.editReply({ files: [data]});
             });
-	},
+    },
 };
 
 async function generateRankCard(member, userLevelData, rank){

@@ -2,9 +2,9 @@ const { SlashCommandBuilder } = require('discord.js');
 const sequelize = require('sequelize');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('setlevel')
-		.setDescription('Modifier le niveau d\'un utilisateur.')
+    data: new SlashCommandBuilder()
+        .setName('setlevel')
+        .setDescription('Modifier le niveau d\'un utilisateur.')
         .setDefaultMemberPermissions(0x8)
         .addUserOption(
             option =>  option
@@ -18,7 +18,7 @@ module.exports = {
                 .setDescription('Niveau')
                 .setRequired(true)),
 
-	async execute(interaction, client) {
+    async execute(interaction, client) {
         const member = interaction.options.getMember('user');
         const level = interaction.options.getInteger('level');
         const userLevelData = await client.database.leveldb.findOne({ where: { name: member.id } });

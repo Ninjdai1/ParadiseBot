@@ -3,11 +3,11 @@ const fs = require('fs');
 const fetch = require('node-fetch')
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('customize')
-		.setDescription('Customiser l\'apparence du bot.'),
+    data: new SlashCommandBuilder()
+        .setName('customize')
+        .setDescription('Customiser l\'apparence du bot.'),
 
-	async execute(interaction, client) {
+    async execute(interaction, client) {
         return interaction.reply({ embeds: [customizeEmbed], components: [btnROW], ephemeral: true});
     }
 }

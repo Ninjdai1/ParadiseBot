@@ -1,9 +1,9 @@
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('setluck')
-		.setDescription('Modifier le /luck.')
+    data: new SlashCommandBuilder()
+        .setName('setluck')
+        .setDescription('Modifier le /luck.')
         .setDefaultMemberPermissions(0x8)
         .addStringOption(
             option =>  option

@@ -2,9 +2,9 @@ const { xpVCs, guildId } = require('../config.json')
 const { giveLevelRoles } = require('../functions')
 
 module.exports = {
-	name: 'ready',
-	once: true,
-	async execute(client) {
+    name: 'ready',
+    once: true,
+    async execute(client) {
         console.log("Prêt !");
         client.user.setStatus('online');
         let serverData = await client.database.serverdb.findOne({ where: { name: guildId } });

@@ -1,11 +1,11 @@
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('top')
-		.setDescription('Afficher le leaderboard.'),
+    data: new SlashCommandBuilder()
+        .setName('top')
+        .setDescription('Afficher le leaderboard.'),
 
-	async execute(interaction, client) {
+    async execute(interaction, client) {
         const top = await client.database.leveldb.findAll({ 
             limit: 10 ,
             order: [['level','DESC'],

@@ -1,9 +1,9 @@
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('config')
-		.setDescription('Modifier le bot.')
+    data: new SlashCommandBuilder()
+        .setName('config')
+        .setDescription('Modifier le bot.')
         .setDefaultMemberPermissions(0x8)
         .addBooleanOption(
             option =>  option

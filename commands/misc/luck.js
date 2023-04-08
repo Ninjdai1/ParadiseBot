@@ -1,11 +1,11 @@
 const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-	data: new SlashCommandBuilder()
-		.setName('luck')
-		.setDescription('Essayer de tomber sur le numéro gagnant'),
+    data: new SlashCommandBuilder()
+        .setName('luck')
+        .setDescription('Essayer de tomber sur le numéro gagnant'),
 
-	async execute(interaction, client) {
+    async execute(interaction, client) {
         await interaction.deferReply();
         const now = Date.now();
         let userData = await client.database.userdb.findOne({ where: { name: interaction.user.id } });
