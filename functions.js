@@ -32,8 +32,6 @@ function deploy_commands(client, loadcommands) {
 }
 
 function deploy_textcommands(client) {
-    if (typeof loadcommands != 'boolean') throw "type of loadcommands argument needs to be boolean";
-
     const commands = [];
     client.textcommands = new Collection();
     const commandCategories = fs.readdirSync('./textcommands').filter(file => !file.includes('.'));
@@ -81,4 +79,4 @@ async function autoUpdate() {
     console.error('stderr:', stderr);
 }
 
-module.exports = { deploy_commands, giveLevelRoles, autoUpdate }
+module.exports = { deploy_commands, deploy_textcommands, giveLevelRoles, autoUpdate }
