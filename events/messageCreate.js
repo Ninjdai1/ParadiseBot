@@ -9,7 +9,7 @@ module.exports = {
         if(message.author.bot) return;
         if(!client.isXPEnabled) return;
         if(message.content.startsWith("+")) {
-            const cmdName = message.content.replace("+","");
+            const cmdName = message.content.replace("+","").split(" ")[0];
             const command = client.textcommands.get(cmdName);
             if (!command) return;
             
