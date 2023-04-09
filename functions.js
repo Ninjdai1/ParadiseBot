@@ -40,7 +40,7 @@ function deploy_textcommands(client) {
         for (const file of commandFiles) {
             const command = require(`./textcommands/${category}/${file}`);
             commands.push(command.data);
-            client.commands.set(command.data.name, command);
+            client.textcommands.set(command.data.name, command);
 
             console.log(`${category}/${command.data.name} chargé !`);
         }
