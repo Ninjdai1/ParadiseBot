@@ -9,7 +9,7 @@ module.exports = {
         description: 'Afficher votre level.'
     },
     async execute(message, client) {
-        const m = await message.reply({ content: "Génération de la carte..." })
+        const m = await message.reply({ content: "Génération de la carte..." });
         const member = message.mentions?.members.first() || message.author;
         let userLevelData = await client.database.leveldb.findOne({ where: { name: member.id } });
         if(!userLevelData){
