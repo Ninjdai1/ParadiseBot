@@ -1,10 +1,16 @@
+const { PermissionFlagsBits } = require('discord.js');
+const { Illustrator, IllustratorImage, ImageLoader } = require("illustrator.js");
+const fs = require('fs');
+const { devId } = require('../../config.json');
+
 module.exports = {
     data: {
         name: "rank",
         description: 'Afficher votre level.'
     },
     async execute(message, client) {
-        const member = message.mentions.members.first() || message.author;
+        const m = await message.reply({ content: "Génération de la carte..." })
+        const member = message.mentions?.members.first() || message.author;
         let userLevelData = await client.database.leveldb.findOne({ where: { name: member.id } });
         if(!userLevelData){
             await client.database.leveldb.create({
@@ -18,8 +24,8 @@ module.exports = {
 
         const rank = client.database.top.indexOf(member.id);
         generateRankCard(member, userLevelData, rank)
-            .then(data => {
-                interaction.editReply({ files: [data]});
+            .then(async data => {
+                await m.edit({ files: [data], content: ""});
             });
     },
 };
@@ -30,8 +36,8 @@ async function generateRankCard(member, userLevelData, rank){
         height: 512,
         cardColor: userLevelData.dataValues.cardColor,
         backgroundImage: "default.png",
-        avatar: member.user.displayAvatarURL({ dynamic: false, format: 'png' }),
-        username: member.user.username,
+        avatar: member.displayAvatarURL({ dynamic: false, format: 'png' }),
+        username: member.username,
         font: {
             path: "./MANROPE_BOLD.ttf",
             name: "MANROPE_BOLD"
